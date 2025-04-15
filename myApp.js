@@ -2,6 +2,22 @@ const express = require('express');
 const helmet = require('helmet');
 const app = express();
 
+
+app.use(helmet(
+  {
+    noCache : true 
+  },
+  {
+    contentSecurityPolicy : 
+    {"directives":
+      {
+        defaultSrc : ["'self'"], 
+        scriptSrc : ["'self'", 'trusted-cdn.com']
+      }
+    }
+  }
+))
+/*
 app.use(helmet.hidePoweredBy());
 app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
@@ -18,7 +34,9 @@ app.use(helmet.contentSecurityPolicy(
       scriptSrc : ["'self'", 'trusted-cdn.com']
     }
   }
-));
+
+  
+));*/
 
 
 
